@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="comment" style="max-width:max-content;margin:auto;text-align: center;border: 0.2rem solid #ccc;">
+        <div style="margin: 1rem;">
+            <input type="text" name="userName" id="userName" placeholder="姓名">
+            <small id="userNameWarning" style="color:#f22"></small>
+        </div>
+        <div style="margin: 1rem;">
+            <textarea name="content" id="content" rows="10" placeholder="留言內容"></textarea>
+            <small id="contentWarning" style="color:#f22"></small>
+        </div>
+        <button type="submit">送出</button>
+    </form>
+    <h4>留言板</h4>
+    <ul id="list" style="margin: 0.2rem;text-align: center;"></ul>
+    <script>
+        const list=document.getElementById("list");
+        list.textContent=list.textContent || "目前暫無資訊";
+        const form=document.getElementById("comment");
+        form.addEventListener("submit",function(e){
+            e.preventDefault();
+            if(document.getElementById("userName").value.trim()==''){
+                document.getElementById("userNameWarning").textContent="姓名不可為空!"
+            }else if(document.getElementById("content").value.trim()==''){
+                document.getElementById("userNameWarning").textContent='';
+                document.getElementById("contentWarning").textContent="留言內容不可為空!"
+            }else{
+                document.getElementById("userNameWarning").textContent='';
+                document.getElementById("contentWarning").textContent='';
+                if(list.textContent==="目前暫無資訊"){
+                    list.textContent='';
+                };
+                const item=document.createElement("li");
+                const fragment=document.createDocumentFragment();
+                const user=document.createElement("span");
+                user.textContent=`${document.getElementById("userName").value}: `;
+                fragment.appendChild(user);
+                const content=document.createElement("span");
+                const text=document.getElementById("content").value;
+                if(text.length>=20){
+                    const fragment=document.createDocumentFragment();
+                    const reduceText=document.createElement("span");
+                    reduceText.textContent=`${text.slice(0,9)}...`;
+                    reduceText.setAttribute("class","reduce");
+                    reduceText.style.display="block";
+                    fragment.appendChild(reduceText);
+                    const completeText=document.createElement("p");
+                    completeText.style.margin="0 0.2rem";
+                    completeText.style.width=`${window.innerWidth*0.5}px`;
+                    completeText.textContent=text;
+                    completeText.setAttribute("class","complete");
+                    completeText.style.display="none";
+                    fragment.appendChild(completeText);
+                    const toggle=document.createElement("span");
+                    toggle.textContent="🔽";
+                    toggle.setAttribute("class","close");
+                    toggle.style.cursor="pointer";
+                    fragment.appendChild(toggle);
+                    content.appendChild(fragment);
+                    content.style.display="flex";
+                }else{
+                    content.textContent=text;
+                }
+                content.style.paddingLeft="1rem";
+                content.style.minWidth="max-content";
+                fragment.appendChild(content);
+                const del=document.createElement("span");
+                del.textContent="❌";
+                del.setAttribute("class","x");
+                del.style.cursor="pointer";
+                del.style.width="100%";
+                content.style.paddingLeft="1rem";
+                del.style.textAlign="end";
+                fragment.appendChild(del);
+                item.appendChild(fragment);
+                item.style.maxWidth="75%";
+                item.style.display="flex";
+                item.style.margin="1.5rem";
+                document.getElementById("list").appendChild(item);
+                this.reset();
+            }
+        });
+        list.addEventListener("click",function(e){
+            const trigger=e.target;
+            const contain=trigger.closest("li");
+            if(trigger.classList.contains("x")){
+                contain.remove();
+            }else if(trigger.classList.contains("close")){
+                trigger.classList.toggle("close");
+                trigger.classList.toggle("open");
+                trigger.textContent="🔼";
+                contain.querySelector(".reduce").style.display="none";
+                contain.querySelector(".complete").style.display="block";
+            }else if(trigger.classList.contains("open")){
+                trigger.classList.toggle("open");
+                trigger.classList.toggle("close");
+                trigger.textContent="🔽";
+                contain.querySelector(".complete").style.display="none";
+                contain.querySelector(".reduce").style.display="flex";
+            }
+        });
+    </script>
+</body>
+</html>
+
+<!--優化建議-->
+<!--
+    1. 變數名稱重複使用
+    2. 將線性邏輯改為函式封裝
+    3. toggle搭配CSS處理
+-->
