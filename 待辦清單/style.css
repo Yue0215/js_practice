@@ -1,0 +1,104 @@
+#backlog{
+    margin:2rem auto 5rem;
+    max-width: 80%;
+    padding:1rem;
+    border:0.5rem solid #ddd;
+    text-align: center;
+    position: relative;
+}
+#backlog::before{
+    position:absolute;
+    content:"To Do";
+    font-size: 32px;
+    font-weight: bolder;
+    top:-1.5em;
+    left:0px;
+    background-color: #fff;
+    padding: 0.2em;
+    margin: 0.5em;
+}
+
+#toDo,fieldset,#detail{
+    margin:2rem auto;
+    display: block;
+    font-size: 18px;
+    text-align: left;
+}
+#toDo,#detail{
+    width:98%;
+}
+button{
+    font-size: 18px;;
+}
+.warning{
+    color:#f22;
+}
+h2::before{
+    display: block;
+    content: ' ';
+    height:0.2rem;
+    width:100%;
+    background-color: #ccccd3;
+    margin-bottom: 2rem;
+}
+#list{
+    list-style: none;
+    border:0.15rem solid rgba(50,50,50,0.4);
+    max-width: 100%;
+    padding: 0.4em;
+    margin: 0 1rem 5rem;
+}
+li{
+    margin-bottom: 2rem;
+}
+.icon{
+    margin-bottom: 2rem;
+}
+.done,.edit,.del,.save{
+    font-size:18px;
+    cursor:pointer;
+}
+.title{
+    font-size:20px;
+    border:none;
+    border-radius: 0.2em;
+    margin:0.1em;
+    padding: 0.4em;
+    width: max-content;
+    display: inline-block;
+}
+
+.emergency.yet{
+    background-color: rgba(255, 15, 15,0.6);
+}
+.normal.yet{
+    background-color: rgba(239, 239, 52,0.6);
+}
+.relax.yet{
+    background-color: rgba(118, 239, 118,0.6);
+}
+.title.done{
+    opacity: 0.4;
+    text-decoration: line-through;
+    background-color: rgb(150, 150, 150);
+}
+.btn{
+    text-align: center;
+    width:100%;
+    background-color: #dcdcdc;
+    color:white;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius:0.2rem;
+    margin-top:0.1em;
+}
+textarea:not(#detail){
+    width:100%;
+    border:none;
+    font-size: 18px;
+    /* margin: -0.3rem; */
+    /* padding: 0.3rem; */
+}
+.open,.close{
+    cursor:pointer;
+}

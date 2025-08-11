@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form name="backlog" id="backlog">
+        <input type="text" name="toDo" id="toDo" placeholder="名稱">
+        <span class="warning"></span>
+        <fieldset>
+            <legend>狀態</legend>
+            <input type="radio" name="state" id="emergency" value="emergency">
+            <label for="emergency">緊急</label>
+            <input type="radio" name="state" id="normal" value="normal">
+            <label for="normal">注意</label>
+            <input type="radio" name="state" id="relax" value="relax">
+            <label for="relax">一般</label>
+            <span class="warning"></span>
+        </fieldset>
+        <textarea name="detail" rows="10" id="detail" placeholder="說明"></textarea>
+        <button type="submit">送出</button>
+    </form>
+    <h2>待辦事項</h2>
+    <div class="icon">✅完成 ✏️編輯 ❌移除 🆗儲存編輯 ↩️取消完成</div>
+    <ul id="list">暫無待辦事項</ul>
+    <script src="javascript.js"></script>
+</body>
+</html>
