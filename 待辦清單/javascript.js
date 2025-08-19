@@ -1,31 +1,27 @@
+const state=[]; //{id:Date.now(), title:..., content:[false,...], situation:..., edit:false, done:false}
 const list=document.getElementById("list");
-if(list.childElementCount===0){
-    list.textContent="暫無待辦事項";
-};
-//表單驗證
-document.getElementById("backlog").addEventListener("submit",function(e){
-    e.preventDefault();
-    if(document.getElementById("toDo").value.trim()===''){
-        document.querySelector("#backlog #toDo~span").textContent="待辦事項不可為空!";
-    }else{
-        document.querySelector("#backlog #toDo~span").textContent="";
-    }
-    if(document.querySelector("input[name=state]:checked")==null){
-        document.querySelector("#relax~span").textContent="事項狀態不可為空!";
-    }else{
-        //清空報錯消息
-        document.querySelectorAll("#backlog span").forEach(function(value){value.textContent=''});
+function render(){
+    console.log(state.length);
+    if(state.length===0){
+        list.textContent="暫無待辦事項 😙🎵";
+        return;
+    };
+    list.textContent='';
+    state.forEach((value)=>{
         const item=document.createElement("li");
+        item.setAttribute("data-id",`${value.id}`);
         const editItem=document.createElement("form");
         const frag=document.createDocumentFragment();
         const title=document.createElement("input");
-        title.setAttribute("disabled","true");
+        if(!value.edit){
+            title.setAttribute("disabled",true)
+        }
         title.classList.add("title");
-        title.classList.add("yet");
-        title.value=document.getElementById("toDo").value;
-        if(document.querySelector("input[name=state]:checked").value==='emergency'){
+        title.classList.add((value.done?"done":"yet"));
+        title.value=value.title;
+        if(value.situation==='emergency'){
             title.classList.add("emergency");
-        }else if(document.querySelector("input[name=state]:checked").value==='normal'){
+        }else if(value.situation==='normal'){
             title.classList.add("normal");
         }else{
             title.classList.add("relax");
@@ -37,11 +33,12 @@ document.getElementById("backlog").addEventListener("submit",function(e){
         operate.setAttribute("class","btnGroup");
         const done=document.createElement("span");
         done.classList.add("done");
-        done.textContent="✅";
+        done.textContent=(value.done?"↩️":"✅");
 
         const edit=document.createElement("span");
-        edit.classList.add("edit");
-        edit.textContent="✏️";
+        edit.classList.add((value.edit?"save":"edit"));
+
+        edit.textContent=(value.edit?"🆗":"✏️");
 
         const del=document.createElement("span");
         del.classList.add("del");
@@ -54,77 +51,90 @@ document.getElementById("backlog").addEventListener("submit",function(e){
         operate.appendChild(smallFrag);
         frag.appendChild(operate);
         //若有說明
-        if(document.getElementById("detail").value.trim()!==''){
+        if(value.content[1]){
             const content=document.createElement("textarea");
-            content.style.display="none";
-            content.setAttribute("disabled","true");
-            content.value=document.getElementById("detail").value.trim();
+            content.classList.add("content");
+            content.style.display=(value.content[0]?"block":"none");
+            if(!value.edit){
+                content.setAttribute("disabled",true)
+            }
+            content.value=value.content[1];
             frag.appendChild(content);
             const open=document.createElement("div");
             open.classList.add("btn");
-            open.classList.add("open");
-            open.textContent="OPEN";
+            open.classList.add("fold");
+            open.textContent=(value.content[0]?"CLOSE":"OPEN");
             frag.appendChild(open);
-        }
-        if(list.textContent==='暫無待辦事項'){
-            list.textContent='';
         }
         editItem.appendChild(frag);
         item.appendChild(editItem);
         list.appendChild(item);
-        this.reset();
+    });
+};
+//表單驗證
+document.getElementById("backlog").addEventListener("submit",function(e){
+    e.preventDefault();
+    if(document.getElementById("toDo").value.trim()===''){
+        document.querySelector("#toDo~.warning").textContent="待辦事項不可為空!";
+        return;
+    }else{
+        document.querySelector("#backlog #toDo~span").textContent="";
     }
+    if(document.querySelector("input[name=state]:checked")==null){
+        document.querySelector("#relax~.warning").textContent="事項狀態不可為空!";
+        return;
+    }else{
+        document.querySelector("#relax~.warning").textContent="";
+    }
+    //清空報錯消息
+    document.querySelectorAll(".warning").forEach((value)=>{value.textContent=''});
+    state.push({
+        id:String(Date.now()), 
+        title:document.getElementById("toDo").value, 
+        content:[false,document.getElementById("detail").value.trim()],
+        situation:document.querySelector("input[name=state]:checked").value,
+        edit:false,
+        done:false 
+    })
+    render();
+    this.reset();
 });
 //處理內部點擊事件(事件代理)
 list.addEventListener("click",function(e){
-    const target=e.target;
+    const target=e.target.closest("li").dataset.id;
+    const order=state.findIndex((val)=>{return val.id===target;});
     //完成
-    if(target.classList.contains("done")){  
-        target.textContent="↩️";
-        const dad=target.closest("li");
-        const title=dad.querySelector(".title");
-        if(title.classList.contains("yet")){
-            title.classList.replace("yet","done");
-        }else{
-            title.classList.replace("done","yet");
-        };
-        
+    if(e.target.classList.contains("done")){
+        state[order].done=!state[order].done;
+        render();
     };
     //編輯按鈕
-    if(target.classList.contains("edit")){
-        target.textContent="🆗";
-        const dad=target.closest("li");
-        dad.querySelectorAll("input,textarea").forEach(function(value){
-            value.removeAttribute("disabled");
-        })
-        dad.querySelector(".title").focus();
-        target.classList.replace("edit","save");
-    }else if(target.classList.contains("save")){
+    if(e.target.classList.contains("edit")){
+        state[order].edit=!state[order].edit;
+        render();
+        document.querySelector(`li[data-id="${target}"] .title`).focus();
+    }else if(e.target.classList.contains("save")){
         //儲存編輯
-        target.textContent="✏️";
-        const dad=target.closest("li");
-        dad.querySelectorAll("input,textarea").forEach(function(value){
-            value.setAttribute("disabled","true");
-        })
-        target.classList.replace("save","edit");
+        state[order].edit=!state[order].edit;
+        const editOne=e.target.closest("li");
+        state[order].title=editOne.querySelector(".title").value;
+        if(state[order].content[1]){
+            state[order].content[1]=editOne.querySelector(".content").value;
+        }
+        render();
     };
     //刪除按鈕
-    if(target.classList.contains("del")){
-        target.closest("li").remove();
-        if(list.childElementCount===0){
-            list.textContent="暫無待辦事項";
-        };
+    if(e.target.classList.contains("del")){
+        state.splice(order,1);
+        render();
     };
     //展開收起
-    if(target.classList.contains("open")){
-        target.textContent="CLOSE";
-        target.classList.replace("open","close");
-        const dad=target.closest("li");
-        dad.querySelector("textarea").style.display="block";
-    }else if(target.classList.contains("close")){
-        target.textContent="OPEN";
-        target.classList.replace("close","open");
-        const dad=target.closest("li");
-        dad.querySelector("textarea").style.display="none";
+    if(e.target.classList.contains("fold")){
+        state[order].content[0]=!state[order].content[0];
+        render();
     }
+    
+});
+document.addEventListener("DOMContentLoaded",()=>{
+    render();
 });

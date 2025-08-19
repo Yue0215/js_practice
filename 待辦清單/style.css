@@ -91,6 +91,7 @@ li{
     font-weight: bold;
     border-radius:0.2rem;
     margin-top:0.1em;
+    cursor:pointer;
 }
 textarea:not(#detail){
     width:100%;
@@ -98,7 +99,4 @@ textarea:not(#detail){
     font-size: 18px;
     /* margin: -0.3rem; */
     /* padding: 0.3rem; */
-}
-.open,.close{
-    cursor:pointer;
 }
