@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    
+    <template>
+
+    </template>
+    <form id="create">
+        <h1 id="createTitle">Add Goods</h1>
+        <input type="text" name="name" id="name" placeholder="請輸入品名">
+        <div class="warning"></div>
+        <input type="number" name="price" id="price" placeholder="請輸入價格">
+        <div class="warning"></div>
+        <button type="submit">新增</button>
+    </form>
+    <div id="itemShow">
+        <h2>Goods</h2>
+        <div class="noItem">暫無資訊</div>
+        <template id="itemTemplate">
+            <div class="calculate">
+                <div class="itemInfo">
+                    <span class="itemName">11</span>
+                    <span class="itemPrice">$22</span>
+                </div>
+                <div class="quantity">
+                    <span class="resetBtn">🔄️</span>
+                    <span class="delBtn">❌</span>
+                    <span class="minus">➖</span>
+                    <span class="num">0</span>
+                    <span class="plus">➕</span>
+                </div>
+            </div>
+        </template>
+    </div>
+    <div id="total">
+        <h2>Total</h2>
+        <div class="noItem">暫無資訊</div>
+        <ul id="totalShow">
+            <template id="totalTemplate">
+                <li class="detail">
+                    <span class="totalName"></span>
+                    <span class="totalPrice"></span>
+                </li>
+            </template>
+        </ul>
+    </div>
+    
+    </div>
+    <script src="javascript.js"></script>
+</body>
+</html>

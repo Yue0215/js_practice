@@ -4,20 +4,22 @@ title: 練習
 ---
 
 # 簡易留言板 | JavaScript DOM 實作練習
-使用原生 JavaScript 撰寫的互動式留言板，具備留言新增、展開/收合、刪除功能
+使用原生 JavaScript 撰寫的互動式留言板，具備留言新增、刪除及(過長留言)展開/收合功能
 
 ## 練習目的
 在掌握 JavaScript DOM 操作與事件處理的基礎後，希望透過此留言板小專案進一步強化以下能力： 
 - 表單資料擷取與基本驗證 
 - 動態建立與修改 DOM 元素 
 - 事件處理
+- 事件代理
+- 程式結構化練習
 
 ## 功能清單與技術使用
 | 功能 | 簡述 | 實作 | 主要使用API/方法 |
 | :---: | :---: | :--- | :--- |
-| 表單驗證 | 若使用者未填寫姓名或留言內容(空白視為未填寫)，<br>則禁止送出並顯示錯誤訊息 | 1.表單添加事件監聽器阻止預設送出行為<br>2.取得表單元素值檢查，若為空則抓取指定元素寫入提示訊息 | Element.addEventListener()<br>e.preventDefault()<br>document.getElementById()<br>Element.value<br>String.trim()<br>Element.textContent |
-| 留言展示 | 顯示使用者留言，若留言內容超過二十字則加上收合功能 | 1.抓取表單輸入值，若留言內容字數超過指定值則做收合處理<br>2.將表單結果加入留言展示區塊 | document.createElement()<br>document.createDocumentFragment()<br> document.getElementById()<br>Element.value<br>Element.setAttribute()<br>Node.appendChild()<br>Element.classList.toggle()<br>document.querySelector() |
-| 留言刪除 | 若使用者點擊 :x: 按鈕則刪除此則訊息 | 留言展示區添加事件監聽器捕捉點擊行為，利用事件代理將留言刪除 | Element.addEventListener()<br>e.target<br>Element.closest()<br>Element.classList.contains()<br>Element.remove() |
+| 表單驗證 | 若使用者未填寫姓名或留言內容(空白視為未填寫)，<br>則禁止送出並顯示錯誤訊息 | 1.表單添加事件監聽器阻止預設送出行為<br>2.若表單元素值為空，則抓取指定元素寫入提示訊息 | e.preventDefault()<br>Element.value<br>String.trim() |
+| 留言展示 | 顯示使用者留言，若留言內容超過二十字則加上收合功能 | 1.抓取表單輸入值，若留言內容字數超過指定值則做收合處理<br>2.將表單結果加入留言展示區塊 | document.createElement()<br>document.createDocumentFragment()<br>Node.appendChild()<br>Element.classList.toggle() |
+| 留言刪除 | 若使用者點擊 :x: 按鈕則刪除此則訊息 | 留言展示區添加事件監聽器捕捉點擊行為，利用事件代理將留言刪除 | e.target<br>Element.closest()<br>Element.classList.contains()<br>Element.remove() |
 
 
 
