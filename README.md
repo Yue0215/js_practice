@@ -5,7 +5,7 @@ title: README_Main
 
 # js_practice | 自學 JavaScript 的練習紀錄
 
-這個儲存庫記錄了我在 2025 暑假期間自學 JavaScript 的實作練習
+這個儲存庫記錄了我從 2025 暑假開始自學 JavaScript 的實作練習
 內容以運用 HTML5 / CSS3 / JavaScript (ES6+) 為主
   
   
