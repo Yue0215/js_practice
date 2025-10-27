@@ -5,7 +5,7 @@ title: README_Main
 
 # js_practice | 自學 JavaScript 的練習紀錄
 
-這個儲存庫記錄了我從 2025 暑假開始自學 JavaScript 的實作練習
+這個儲存庫記錄了我在 2025 暑假期間自學 JavaScript 的實作練習
 內容以運用 HTML5 / CSS3 / JavaScript (ES6+) 為主
   
   
@@ -37,8 +37,8 @@ title: README_Main
     - 所學概念: 使用 `<template>` + cloneNode() 進行 DOM templating
     - 反思: 狀態與操作抽層、邏輯簡化
 * [意見回饋表](意見回饋表/學習心得.md)
-    - 所學概念:
-    - 反思: 
+    - 所學概念: asynchronous operation, AJAX, localStorage/sessionStorage
+    - 反思: 資料格式不熟悉
 
 
 
