@@ -1,0 +1,72 @@
+
+#title{
+    text-align: center;
+}
+#comment{
+    display:flex;
+    flex-direction: column;
+    margin:5rem 1rem;
+    padding: 1rem;
+    border:0.2em solid #ddd;
+    font-size: 16px;
+}
+@media(min-width:700px){
+    #comment{
+        width: 70%;
+        margin:5rem auto;
+    }
+}
+label{
+    position: absolute;
+    top:-1em;
+    background-color: white;
+    padding: 0 0.5em;
+}
+.inputSet{
+    position: relative;
+    margin:1.5em 1em;
+    padding: 1em;
+    box-sizing: border-box;
+}
+#name,#mail,#content,#submit{
+    margin:auto;
+    padding: 0.3em;
+    box-sizing: border-box;
+    width:100%;
+    font-size: 16px;
+}
+#past{
+    margin: 2rem;
+}
+#showPast{
+    margin: 3rem auto;
+    font-size: 18px;
+}
+.hide{
+    display: none;
+}
+#displayTable{
+    width: 100%;
+    margin: 2rem auto;
+    border-collapse: collapse;
+    font-size: 18px;
+    word-break:break-word;
+}
+th,td{
+    width: max-content;
+}
+thead th{
+    padding:1em;
+    text-align: center;
+    font-size: 20px;
+}
+.recordInfo{
+    padding: 0.3em 0.5em;
+    border: 0.2em solid #ddd;
+}
+.noItem{
+    padding: 1.5em 0;
+    font-size: 24px;
+    color: #bbb;
+    text-align: center;
+}

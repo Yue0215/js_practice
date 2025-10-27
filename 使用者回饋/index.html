@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form method="POST" id="comment">
+        <h2 id="title">使用者意見回饋</h2>
+        <div class="inputSet">
+            <label for="name">姓名</label>
+            <input type="text" name="name" id="name" placeholder="請輸入您的姓名" required>       
+        </div>
+        <div class="inputSet">
+            <label for="mail">電子郵件</label>
+            <input type="email" name="mail" id="mail" placeholder="請輸入您的電子郵件" required>
+        </div>
+        <div class="inputSet">
+            <label for="content">意見回饋</label>
+            <textarea name="content" id="content" rows="10" placeholder="需至少20字" required></textarea>
+        </div>
+        <button type="submit" id="submit" disabled>送出</button>
+    </form>
+    <div id="past">
+        <button type="button" id="showPast">回饋紀錄 🔽</button>
+        <template id="pastRecord">
+            <tr class="record">
+                <td class="recordInfo"></td>
+                <td class="recordInfo"></td>
+                <td class="recordInfo"></td>
+            </tr>
+        </template>
+        <table id="displayTable" class="hide">
+            <thead>
+                <tr>
+                    <th>🕒time</th>
+                    <th>😊user</th>
+                    <th>✒️content</th>
+                </tr>
+            </thead>
+            <tbody id="display"></tbody>
+        </table>
+    </div>
+    <script src="JavaScript.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+</body>
+</html>
