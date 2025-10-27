@@ -37,8 +37,8 @@ title: README_Main
     - 所學概念: 使用 `<template>` + cloneNode() 進行 DOM templating
     - 反思: 狀態與操作抽層、邏輯簡化
 * [意見回饋表](意見回饋表/學習心得.md)
-    - 所學概念:
-    - 反思: 
+    - 所學概念: JavaScript 原生表單驗證, asynchronous operation, AJAX, localStorage/sessionStorage
+    - 反思: 資料格式不熟悉
 
 
 
